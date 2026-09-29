@@ -14,6 +14,7 @@ import Navigation from "@/components/Navigation";
 import Aman from "../components/Aman";
 import FAQGravity from "../components/FAQGravity";
 import VerticalAccordion from "../components/VerticalAccordion";
+import LanyardPass from "@/components/LanyardPass";
 
 const dummyTestimonials = [
   {
@@ -241,6 +242,30 @@ const Index = () => {
         <SocialStrip />
         <SpinningCTA />
 
+        {/* 3D Interactive Lanyard Pass Card */}
+        <div className="absolute top-0 right-0 sm:right-6 md:right-12 lg:right-20 xl:right-28 w-[320px] sm:w-[400px] md:w-[480px] lg:w-[540px] h-[58vh] sm:h-[68vh] md:h-[78vh] lg:h-[86vh] z-10 pointer-events-auto flex items-start justify-center">
+          <LanyardPass
+            content={{
+              attendeeName: "Aman Roney",
+              ticketType: "Frontend Web Developer",
+              ticketNumber: "DEV-2026",
+              eventName: "PORTFOLIO PASS",
+              eventDate: "ALWAR, RJ",
+              barcodeValue: "AMANRONEYDEV",
+              strapText: "AMAN RONEY · FRONTEND DEVELOPER",
+            }}
+            look={{
+              photo: "/aman.jpg",
+              paper: "#0c0e12",
+              ink: "#ffffff",
+              accent: "#38bdf8",
+              strapColor: "#18181b",
+              foil: true,
+              sleeve: true,
+            }}
+          />
+        </div>
+
         {/* Mobile Midpoint Buffer: 80px total height from top to clear hamburger (Hamburger at 24px + 56px height) */}
         <div className="h-[32px] w-full md:hidden" /> {/* py-12 (48px) + 32px = 80px */}
 
@@ -251,7 +276,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="z-10 mt-auto mb-6 md:mb-8">
+        <div className="z-20 mt-auto mb-6 md:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
