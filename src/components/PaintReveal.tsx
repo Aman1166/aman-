@@ -52,6 +52,8 @@ export default function PaintReveal({
     resize();
     window.addEventListener("resize", resize);
 
+    let lastMoveTime = 0;
+
     // Brush stamp that cuts a hole in the black canvas
     const drawStamp = (x: number, y: number, radius: number) => {
       ctx.save();
@@ -77,11 +79,13 @@ export default function PaintReveal({
       const x = clientX - rect.left;
       const y = clientY - rect.top;
 
-      // Only paint if inside or near the hero container
-      if (x < -100 || x > width + 100 || y < -100 || y > height + 100) {
+      // Only paint if inside the hero container
+      if (x < 0 || x > width || y < 0 || y > height) {
         lastPosRef.current = null;
         return;
       }
+
+      lastMoveTime = performance.now();
 
       // Responsive brush radius
       const currentRadius = width < 768 ? brushRadius * 0.75 : brushRadius;
@@ -119,18 +123,39 @@ export default function PaintReveal({
 
     const onMouseLeave = () => {
       lastPosRef.current = null;
+      // Instantly restore pure black when cursor leaves
+      ctx.save();
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, 0, width, height);
+      ctx.restore();
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
 
-    // Animation loop: slowly fades revealed areas back to pure black
+    // Animation loop: rapidly restores black as soon as cursor stops moving
     const loop = () => {
+      const timeSinceMove = performance.now() - lastMoveTime;
+
       ctx.save();
       ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = `rgba(0, 0, 0, ${fadeSpeed})`;
-      ctx.fillRect(0, 0, width, height);
+
+      if (timeSinceMove > 200) {
+        // Cursor has stopped moving: immediately cover back to 100% solid black
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(0, 0, width, height);
+      } else if (timeSinceMove > 60) {
+        // Cursor just stopped (idle > 60ms): rapidly wipe back to black
+        ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+        ctx.fillRect(0, 0, width, height);
+      } else {
+        // While actively moving: smooth trail dissipation
+        ctx.fillStyle = `rgba(0, 0, 0, ${fadeSpeed})`;
+        ctx.fillRect(0, 0, width, height);
+      }
+
       ctx.restore();
 
       animId = requestAnimationFrame(loop);
