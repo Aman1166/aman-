@@ -43,7 +43,10 @@ const FounderAwards = () => {
           
           <div className="flex justify-between items-center mb-12 lg:mb-20">
             <span className="font-sans font-medium text-black text-xl md:text-2xl tracking-tight">
-              AMAN
+              Aman Roney
+            </span>
+            <span className="text-xs font-mono uppercase tracking-widest text-black/50">
+              [ Professional Experience ]
             </span>
           </div>
 
@@ -67,9 +70,9 @@ const FounderAwards = () => {
               }}
               className="text-black text-[3.5rem] sm:text-6xl md:text-[5.5rem] lg:text-[6rem] font-medium leading-[1.05] tracking-tight mb-6"
             >
-              Frontend Web<br />
-              <span className="font-serif italic font-light text-black">Developer</span><br />
-              & Creator.
+              Professional<br />
+              <span className="font-serif italic font-light text-black">Experience</span><br />
+              & Journey.
             </motion.h2>
 
             <motion.p 

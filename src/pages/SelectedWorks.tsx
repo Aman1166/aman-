@@ -382,7 +382,7 @@ const SelectedWorks = () => {
           <div className="marquee-selected-works__track">
             {[0, 1, 2, 3].map((blockIndex) => (
               <div key={blockIndex} className="marquee-selected-works__segment" aria-hidden={blockIndex > 0 ? "true" : undefined}>
-                <span className="marquee-selected-works__text">WE PROVIDE Smart Solution</span>
+                <span className="marquee-selected-works__text">SELECTED PROJECTS · FEATURED WORKS</span>
                 <span className="marquee-selected-works__dash">—</span>
               </div>
             ))}

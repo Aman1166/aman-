@@ -288,17 +288,22 @@ const Index = () => {
 
       {/* Content stack */}
       <div className="relative z-20 w-full bg-transparent">
+        {/* Section 01: About Me */}
         <div id="about" className="h-screen w-full pointer-events-none" />
 
-        <div id="work" className="bg-black text-white relative z-20">
+        {/* Section 02: Selected Projects */}
+        <div id="projects" className="bg-black text-white relative z-20">
           <SelectedWorks />
         </div>
 
-        <div className="bg-white text-black relative z-20">
+        {/* Section 03: Skills & Philosophy */}
+        <div id="skills" className="bg-white text-black relative z-20">
           <VectorBridge />
         </div>
 
+        {/* Section 04: Client Reviews & Testimonials */}
         <motion.div 
+          id="testimonials"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -316,19 +321,22 @@ const Index = () => {
           />
         </motion.div>
 
-        <div className="bg-black text-white relative z-20">
+        {/* Section 05: Services & Metrics */}
+        <div id="services" className="bg-black text-white relative z-20">
           <Testimonial />
         </div>
 
-        <div className="bg-black text-white relative z-20">
+        {/* Section 06: Experience */}
+        <div id="experience" className="bg-black text-white relative z-20">
           <FounderAwards />
         </div>
 
-        <div className="relative z-20">
+        {/* Section 07: FAQ */}
+        <div id="faq" className="relative z-20">
           <FAQGravity />
         </div>
 
-        {/* Change contact layer to z-20 and relative so it scrolls normally OVER the footer */}
+        {/* Section 08: Contact */}
         <div id="contact" className="relative z-20 bg-white text-black">
           <Contact />
         </div>

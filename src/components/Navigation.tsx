@@ -15,10 +15,13 @@ interface SocialItem {
 const navItems: NavItem[] = [
   { label: "Home", href: "#", number: "01" },
   { label: "About Me", href: "#about", number: "02" },
-  { label: "Selected Projects", href: "#work", number: "03" },
-  { label: "What I Do", href: "#work", number: "04" },
-  { label: "Skills & Experience", href: "#about", number: "05" },
-  { label: "Let's Work Together", href: "#contact", number: "06" },
+  { label: "Selected Projects", href: "#projects", number: "03" },
+  { label: "Skills & Philosophy", href: "#skills", number: "04" },
+  { label: "Client Reviews", href: "#testimonials", number: "05" },
+  { label: "What I Do", href: "#services", number: "06" },
+  { label: "Experience", href: "#experience", number: "07" },
+  { label: "FAQ", href: "#faq", number: "08" },
+  { label: "Contact", href: "#contact", number: "09" },
 ];
 
 const socialItems: SocialItem[] = [

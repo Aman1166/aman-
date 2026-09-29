@@ -99,9 +99,12 @@ const Footer = () => {
             {[
               { label: "Home", href: "#" },
               { label: "About Me", href: "#about" },
-              { label: "Selected Projects", href: "#work" },
-              { label: "Skills & Stack", href: "#about" },
-              { label: "Get In Touch", href: "#contact" }
+              { label: "Selected Projects", href: "#projects" },
+              { label: "Skills & Philosophy", href: "#skills" },
+              { label: "Client Reviews", href: "#testimonials" },
+              { label: "Experience", href: "#experience" },
+              { label: "FAQ", href: "#faq" },
+              { label: "Contact", href: "#contact" }
             ].map((link) => (
               <a
                 key={link.label}
@@ -121,11 +124,11 @@ const Footer = () => {
           </h3>
           <div className="flex flex-col gap-2">
             {[
-              { label: "Frontend Development", href: "#work" },
-              { label: "Responsive Web Design", href: "#work" },
-              { label: "Website Development", href: "#work" },
+              { label: "Frontend Development", href: "#services" },
+              { label: "Responsive Web Design", href: "#skills" },
+              { label: "Website Development", href: "#projects" },
               { label: "React & Modern UI", href: "#about" },
-              { label: "Website Deployment", href: "#about" }
+              { label: "Website Deployment", href: "#experience" }
             ].map((link) => (
               <a
                 key={link.label}

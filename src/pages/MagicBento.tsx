@@ -32,7 +32,7 @@ const MagicBento = () => {
         {/* Section Header */}
         <motion.div variants={itemVariants} className="mb-24">
           <h2 className="font-sans text-xs font-bold uppercase tracking-[0.2em] inline-block py-2 px-4 rounded-full border border-white/20">
-            What I Do & Deliver
+            What I Do · Core Services
           </h2>
         </motion.div>
 
