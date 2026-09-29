@@ -177,12 +177,12 @@ export default function PaintReveal({
       ref={containerRef}
       className={`absolute inset-0 w-full h-full overflow-hidden select-none ${className}`}
     >
-      {/* 1. Underlying Image: Zoomed-in Aman's portrait */}
+      {/* 1. Underlying Image: Balanced portrait framing */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <img
           src={revealImage}
           alt="Aman Roney"
-          className="w-full h-full object-cover object-[center_20%] scale-[1.5] sm:scale-[1.7] md:scale-[1.9] pointer-events-none select-none"
+          className="w-full h-full object-cover object-[center_15%] scale-[1.15] sm:scale-[1.25] md:scale-[1.35] pointer-events-none select-none"
         />
       </div>
 
