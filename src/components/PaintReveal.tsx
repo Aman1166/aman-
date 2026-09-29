@@ -8,7 +8,7 @@ interface PaintRevealProps {
 }
 
 export default function PaintReveal({
-  revealImage = "/aman.jpg",
+  revealImage = "/aman-hero.png",
   brushRadius = 150,
   fadeSpeed = 0.022,
   className = "",
@@ -177,12 +177,14 @@ export default function PaintReveal({
       ref={containerRef}
       className={`absolute inset-0 w-full h-full overflow-hidden select-none ${className}`}
     >
-      {/* 1. Underlying Image: Aman's photo */}
-      <img
-        src={revealImage}
-        alt="Aman Roney"
-        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-      />
+      {/* 1. Underlying Image: Aman's standing portrait photo */}
+      <div className="absolute inset-0 flex items-end justify-center pointer-events-none select-none">
+        <img
+          src={revealImage}
+          alt="Aman Roney"
+          className="h-[88vh] md:h-[94vh] w-auto max-w-none md:max-w-full object-contain object-bottom pointer-events-none select-none"
+        />
+      </div>
 
       {/* 2. Top Canvas: Black veil that gets erased on cursor move */}
       <canvas

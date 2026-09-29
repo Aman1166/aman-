@@ -20,7 +20,7 @@ export default function LanyardCard({
   experience = "React · JavaScript · Tailwind",
   companyName = "RizeWorld",
   year = "2026",
-  profileImage = "/aman.jpg",
+  profileImage = "/aman-hero.png",
   backCardText = "DEVELOPER",
   backCardColor = "#8855FF",
   backCardTextColor = "#FFFFFF",
