@@ -47,8 +47,8 @@ const STRAP_HALF_W = 0.07;
 const STRAP_HALF_T = 0.02;
 const CORD_R = 0.032;
 const CORD_REPEAT = 14;
-const TEX_W = 768;
-const TEX_H = 1024;
+const TEX_W = 1024;
+const TEX_H = 1365;
 const STRAP_TEX_W = 256;
 const STRAP_TEX_H = 1024;
 const STRAP_REPEAT = 3;
@@ -633,96 +633,125 @@ function drawFront(canvas: HTMLCanvasElement, mask: HTMLCanvasElement, ticket: a
   if (!ctx) return;
   const w = canvas.width;
   const h = canvas.height;
-  const pad = ticket.pad;
+  const pad = 56;
   const col = w - pad * 2;
-  const mark = Math.round(clamp(pad * 1.7, 64, 104));
-  const markX = pad;
-  const markY = pad;
-  const gap = Math.round(pad * 0.6);
-  const nameSize = parsePx(ticket.nameFont.fontSize, 96, NAME_MIN, NAME_MAX);
-  const metaSize = parsePx(ticket.metaFont.fontSize, 22, META_MIN, META_MAX);
-  const numberSize = parsePx(ticket.numberFont.fontSize, 44, NUM_MIN, NUM_MAX);
-  const cap = Math.round(metaSize * 0.78);
-  const barH = Math.max(44, Math.round(numberSize * 1.1));
-  const footH = Math.max(barH + cap + 8, numberSize) + gap;
 
+  // Rich, deep dark background
   ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = ticket.paper;
+  ctx.fillStyle = "#0c0d12";
   ctx.fillRect(0, 0, w, h);
 
-  // Background Photo
-  if (ticket.photo) {
-    drawContained(ctx, ticket.photo, 0, 0, w, h, 0.28);
-    // Dark bottom gradient overlay for readability
-    const g = ctx.createLinearGradient(0, h * 0.45, 0, h);
-    g.addColorStop(0, "rgba(10,12,16,0)");
-    g.addColorStop(0.5, "rgba(10,12,16,0.85)");
-    g.addColorStop(1, "rgba(10,12,16,0.98)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-  }
+  // Outer border
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
+  ctx.lineWidth = 3;
+  pathRoundRect(ctx, 16, 16, w - 32, h - 32, 32);
+  ctx.stroke();
 
-  // Top Badge Avatar/Mark
-  ctx.fillStyle = ticket.accent;
-  fillRoundRect(ctx, markX, markY, mark, mark, 16);
+  // Top Row: Brand Monogram & Pass Info
+  const markSize = 72;
+  const markX = pad;
+  const markY = pad;
+
+  // "AR" Icon badge
+  ctx.fillStyle = "#0ea5e9";
+  fillRoundRect(ctx, markX, markY, markSize, markSize, 18);
   ctx.fillStyle = "#000000";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  setPrintFont(ctx, ticket.metaFont, Math.round(mark * 0.45), 900);
-  ctx.fillText("AR", markX + mark / 2, markY + mark / 2);
+  setPrintFont(ctx, ticket.metaFont, 36, 900);
+  ctx.fillText("AR", markX + markSize / 2, markY + markSize / 2);
 
-  // Top Event Info
+  // Top right pass info
   ctx.textAlign = "right";
   ctx.textBaseline = "top";
-  ctx.fillStyle = "rgba(255,255,255,0.7)";
-  setPrintFont(ctx, ticket.metaFont, cap, 600);
-  ctx.fillText((ticket.eventName || "PORTFOLIO PASS").toUpperCase(), w - pad, pad + 2);
-  ctx.fillStyle = "rgba(255,255,255,0.9)";
-  setPrintFont(ctx, ticket.metaFont, metaSize, 500);
-  ctx.fillText(ticket.eventDate || "ALWAR, RJ", w - pad, pad + cap + 14);
+  ctx.fillStyle = "#38bdf8";
+  setPrintFont(ctx, ticket.metaFont, 24, 800);
+  ctx.fillText("PORTFOLIO PASS", w - pad, pad + 6);
+  ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+  setPrintFont(ctx, ticket.metaFont, 20, 600);
+  ctx.fillText("VERIFIED · ALWAR, RJ", w - pad, pad + 38);
 
-  // Name & Role
-  let y = h - footH - 180;
+  // --- PHOTO CONTAINER (Framed, Crystal Clear, Sharp) ---
+  const photoY = markY + markSize + 28;
+  const photoH = 680;
+  const photoW = col;
+
+  if (ticket.photo) {
+    ctx.save();
+    pathRoundRect(ctx, markX, photoY, photoW, photoH, 24);
+    ctx.clip();
+    drawContained(ctx, ticket.photo, markX, photoY, photoW, photoH, 0.22);
+    // Subtle gradient only at very bottom of photo for smooth blend into text
+    const imgGrad = ctx.createLinearGradient(0, photoY + photoH * 0.75, 0, photoY + photoH);
+    imgGrad.addColorStop(0, "rgba(12, 13, 18, 0)");
+    imgGrad.addColorStop(1, "rgba(12, 13, 18, 0.9)");
+    ctx.fillStyle = imgGrad;
+    ctx.fillRect(markX, photoY, photoW, photoH);
+    ctx.restore();
+
+    // Sharp border around photo
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+    ctx.lineWidth = 3;
+    pathRoundRect(ctx, markX, photoY, photoW, photoH, 24);
+    ctx.stroke();
+  }
+
+  // --- TEXT SECTION (High Contrast, Bold, Ultra Clear) ---
+  let textY = photoY + photoH + 34;
+
+  // Name: AMAN RONEY
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
-  ctx.fillStyle = ticket.ink;
-  setPrintFont(ctx, ticket.nameFont, nameSize, 800);
-  ctx.fillText(ticket.attendeeName, pad, y);
-  y += nameSize + 12;
+  ctx.fillStyle = "#FFFFFF";
+  setPrintFont(ctx, ticket.nameFont, 82, 900);
+  ctx.fillText("AMAN RONEY", pad, textY);
+  textY += 92;
 
-  ctx.fillStyle = ticket.accent;
-  setPrintFont(ctx, ticket.metaFont, metaSize, 600);
-  ctx.fillText(ticket.ticketType, pad, y);
+  // Role: Frontend Web Developer
+  ctx.fillStyle = "#38bdf8";
+  setPrintFont(ctx, ticket.metaFont, 28, 700);
+  ctx.fillText("FRONTEND WEB DEVELOPER", pad, textY);
+  textY += 40;
 
-  // Separator
-  ctx.strokeStyle = "rgba(255,255,255,0.2)";
-  ctx.lineWidth = 1;
+  // Tech Stack / Tags
+  ctx.fillStyle = "#94a3b8";
+  setPrintFont(ctx, ticket.metaFont, 22, 600);
+  ctx.fillText("REACT · JAVASCRIPT · TAILWIND CSS", pad, textY);
+  textY += 44;
+
+  // Divider
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+  ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(pad, h - footH - 10);
-  ctx.lineTo(w - pad, h - footH - 10);
+  ctx.moveTo(pad, textY);
+  ctx.lineTo(w - pad, textY);
   ctx.stroke();
+  textY += 24;
 
-  // Footer: Number and Barcode
-  ctx.fillStyle = ticket.ink;
-  setPrintFont(ctx, ticket.numberFont, numberSize, 700);
-  ctx.textAlign = "right";
-  ctx.textBaseline = "alphabetic";
-  ctx.fillText(ticket.ticketNumber || "DEV-2026", w - pad, h - pad);
-
-  // Barcode
+  // Footer: Barcode & Pass ID
+  const barH = 50;
+  const barW = Math.round(col * 0.52);
   const bars = barcodeBars(ticket.barcodeValue || "AMANRONEYDEV");
-  const barW = Math.round(col * 0.45);
-  const barY = h - pad - barH;
-  const total = bars.reduce((sum, b) => sum + b.width, 0) || 1;
+  const totalBars = bars.reduce((sum, b) => sum + b.width, 0) || 1;
   let bx = pad;
   for (const bar of bars) {
-    const bw = (bar.width / total) * barW;
+    const bw = (bar.width / totalBars) * barW;
     if (bar.ink) {
-      ctx.fillStyle = ticket.ink;
-      ctx.fillRect(bx, barY, Math.max(1, bw), barH);
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(bx, textY, Math.max(2, bw), barH);
     }
     bx += bw;
   }
+
+  // Pass Number & Status on right
+  ctx.textAlign = "right";
+  ctx.textBaseline = "top";
+  ctx.fillStyle = "#FFFFFF";
+  setPrintFont(ctx, ticket.numberFont, 36, 800);
+  ctx.fillText("DEV-2026", w - pad, textY + 2);
+  ctx.fillStyle = "#4ade80"; // Bright active green indicator
+  setPrintFont(ctx, ticket.metaFont, 18, 700);
+  ctx.fillText("● ACTIVE PASS", w - pad, textY + 42);
 }
 
 function drawBack(canvas: HTMLCanvasElement, mask: HTMLCanvasElement, ticket: any) {
@@ -730,43 +759,50 @@ function drawBack(canvas: HTMLCanvasElement, mask: HTMLCanvasElement, ticket: an
   if (!ctx) return;
   const w = canvas.width;
   const h = canvas.height;
-  const pad = ticket.pad;
+  const pad = 56;
 
   ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = "#0c0d10";
+  ctx.fillStyle = "#0c0d12";
   ctx.fillRect(0, 0, w, h);
 
-  ctx.strokeStyle = "rgba(255,255,255,0.15)";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(pad * 0.5, pad * 0.5, w - pad, h - pad);
+  ctx.strokeStyle = "rgba(255,255,255,0.16)";
+  ctx.lineWidth = 3;
+  pathRoundRect(ctx, 16, 16, w - 32, h - 32, 32);
+  ctx.stroke();
 
-  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  ctx.fillStyle = "#38bdf8";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  setPrintFont(ctx, ticket.metaFont, 24, 600);
-  ctx.fillText((ticket.eventName || "PORTFOLIO PASS").toUpperCase(), w / 2, pad + 30);
+  setPrintFont(ctx, ticket.metaFont, 26, 700);
+  ctx.fillText("PORTFOLIO IDENTIFICATION", w / 2, pad + 40);
 
-  // Large Monogram
-  const mark = Math.round(w * 0.38);
+  // Large Monogram Badge in center
+  const mark = 340;
   const markX = Math.round((w - mark) / 2);
-  const markY = Math.round(h * 0.32);
-  ctx.fillStyle = ticket.accent;
-  fillRoundRect(ctx, markX, markY, mark, mark, 32);
+  const markY = 380;
+  ctx.fillStyle = "#0ea5e9";
+  fillRoundRect(ctx, markX, markY, mark, mark, 48);
   ctx.fillStyle = "#000000";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  setPrintFont(ctx, ticket.metaFont, Math.round(mark * 0.45), 900);
+  setPrintFont(ctx, ticket.metaFont, 160, 900);
   ctx.fillText("AR", markX + mark / 2, markY + mark / 2);
 
   ctx.fillStyle = "#FFFFFF";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  setPrintFont(ctx, ticket.numberFont, 44, 700);
-  ctx.fillText(ticket.attendeeName.toUpperCase(), w / 2, markY + mark + 40);
-  ctx.fillStyle = "rgba(255,255,255,0.5)";
-  setPrintFont(ctx, ticket.metaFont, 20, 500);
-  ctx.fillText("FRONTEND DEVELOPER · REACT & TS", w / 2, markY + mark + 95);
+  setPrintFont(ctx, ticket.numberFont, 56, 800);
+  ctx.fillText("AMAN RONEY", w / 2, markY + mark + 60);
+
+  ctx.fillStyle = "#38bdf8";
+  setPrintFont(ctx, ticket.metaFont, 26, 700);
+  ctx.fillText("FRONTEND WEB DEVELOPER", w / 2, markY + mark + 130);
+
+  ctx.fillStyle = "#94a3b8";
+  setPrintFont(ctx, ticket.metaFont, 22, 500);
+  ctx.fillText("GITHUB.COM/AMAN1166", w / 2, markY + mark + 175);
 }
+
 
 function particle(x: number, y: number, z: number, pinned = false) {
   return { x, y, z, ox: x, oy: y, oz: z, pinned };
@@ -1128,8 +1164,12 @@ export default function LanyardPass(props: LanyardPassProps) {
         const backMap = new THREE.CanvasTexture(backCanvas);
         const frontMaskMap = new THREE.CanvasTexture(frontMaskCanvas);
         const backMaskMap = new THREE.CanvasTexture(backMaskCanvas);
-        frontMap.anisotropy = 8;
-        backMap.anisotropy = 8;
+        frontMap.anisotropy = 16;
+        backMap.anisotropy = 16;
+        frontMap.generateMipmaps = true;
+        backMap.generateMipmaps = true;
+        frontMap.minFilter = THREE.LinearMipmapLinearFilter;
+        backMap.minFilter = THREE.LinearMipmapLinearFilter;
         frontMap.colorSpace = THREE.SRGBColorSpace;
         backMap.colorSpace = THREE.SRGBColorSpace;
         frontMaskMap.colorSpace = THREE.NoColorSpace;
@@ -1139,23 +1179,23 @@ export default function LanyardPass(props: LanyardPassProps) {
           color: edgeTone(THREE, ticketRef.current.paper),
           roughness: 0.34,
           metalness: 0.04,
-          envMapIntensity: 1.3,
+          envMapIntensity: 0.4,
         });
         const frontMat = new THREE.MeshPhysicalMaterial({
           map: frontMap,
-          roughness: 0.26,
+          roughness: 0.35,
           metalness: 0,
-          clearcoat: 1,
+          clearcoat: 0.05,
           clearcoatRoughness: 0.1,
-          envMapIntensity: 1.55,
+          envMapIntensity: 0.15,
         });
         const backMat = new THREE.MeshPhysicalMaterial({
           map: backMap,
-          roughness: 0.26,
+          roughness: 0.35,
           metalness: 0,
-          clearcoat: 1,
+          clearcoat: 0.05,
           clearcoatRoughness: 0.1,
-          envMapIntensity: 1.55,
+          envMapIntensity: 0.15,
         });
 
         let cardGeo = new THREE.BoxGeometry(CARD_W, CARD_H, depthRef.current);
@@ -1169,6 +1209,7 @@ export default function LanyardPass(props: LanyardPassProps) {
         const holoFront = new THREE.Mesh(holoGeo, holoFrontMat);
         holoFront.position.z = depthRef.current / 2 + 0.003;
         holoFront.renderOrder = 1;
+        holoFront.visible = false;
         cardMesh.add(holoFront);
         const holoBack = new THREE.Mesh(holoGeo, holoBackMat);
         holoBack.rotation.y = Math.PI;
@@ -1180,7 +1221,7 @@ export default function LanyardPass(props: LanyardPassProps) {
         const sleeveMat = new THREE.MeshPhysicalMaterial({
           color: 0x0b0c0f,
           transparent: true,
-          opacity: 0.9,
+          opacity: 0,
           roughness: 0.07,
           metalness: 0,
           depthWrite: false,
@@ -1194,7 +1235,7 @@ export default function LanyardPass(props: LanyardPassProps) {
         const sleeveMesh = new THREE.Mesh(sleeveGeo, sleeveMat);
         sleeveMesh.position.y = SLEEVE_SHIFT;
         sleeveMesh.renderOrder = 2;
-        sleeveMesh.visible = sleeveRef.current;
+        sleeveMesh.visible = false;
         cardMesh.add(sleeveMesh);
 
         const clipMat = new THREE.MeshStandardMaterial({ color: 0xd6d1ca, metalness: 0.92, roughness: 0.2 });
