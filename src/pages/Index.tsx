@@ -11,7 +11,7 @@ import Footer from "./Footer";
 import Contact from "./Contact";
 import Testimonial from "./Testimonial";
 import Navigation from "@/components/Navigation";
-import FounderAwards from "../components/FounderAwards";
+import Aman from "../components/Aman";
 import FAQGravity from "../components/FAQGravity";
 import VerticalAccordion from "../components/VerticalAccordion";
 
@@ -328,7 +328,7 @@ const Index = () => {
 
         {/* Section 06: Experience */}
         <div id="experience" className="bg-black text-white relative z-20">
-          <FounderAwards />
+          <Aman />
         </div>
 
         {/* Section 07: FAQ */}

@@ -18,7 +18,7 @@ const floatAnimation = {
   },
 };
 
-const FounderAwards = () => {
+const Aman = () => {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -109,9 +109,6 @@ const FounderAwards = () => {
 
         {/* Right Side (Image & Floating Card) */}
         <div className="w-full lg:w-[45%] relative min-h-[500px] lg:min-h-full overflow-hidden rounded-b-[2rem] lg:rounded-bl-none lg:rounded-r-[2.5rem]">
-          {/* Optional CTA Top Right over image like reference */}
-          
-
           <motion.div className="absolute inset-0 w-full h-full" style={{ y: imageY, scale: imageScale }}>
             <img 
               src="/aman.jpg" 
@@ -169,4 +166,4 @@ const FounderAwards = () => {
   );
 };
 
-export default FounderAwards;
+export default Aman;
