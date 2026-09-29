@@ -243,7 +243,7 @@ const Index = () => {
         <SpinningCTA />
 
         {/* 3D Interactive Lanyard Pass Card */}
-        <div className="absolute top-0 right-0 sm:right-6 md:right-12 lg:right-20 xl:right-28 w-[320px] sm:w-[400px] md:w-[480px] lg:w-[540px] h-[58vh] sm:h-[68vh] md:h-[78vh] lg:h-[86vh] z-10 pointer-events-auto flex items-start justify-center">
+        <div className="absolute top-0 right-6 sm:right-16 md:right-28 lg:right-[18vw] xl:right-[22vw] w-[320px] sm:w-[400px] md:w-[480px] lg:w-[540px] h-[58vh] sm:h-[68vh] md:h-[78vh] lg:h-[86vh] z-10 pointer-events-auto flex items-start justify-center">
           <LanyardPass
             content={{
               attendeeName: "Aman Roney",
