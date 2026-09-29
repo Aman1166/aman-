@@ -20,10 +20,10 @@ interface PaintRevealProps {
 
 export default function PaintReveal({
   baseImage,
-  revealImage,
-  brushSize = 140,
-  fadeDuration = 2.4,
-  maxStamps = 60,
+  revealImage = "/aman.jpg",
+  brushSize = 170,
+  fadeDuration = 2.6,
+  maxStamps = 120,
   className = "",
   borderRadius = "0px",
 }: PaintRevealProps) {

@@ -239,9 +239,9 @@ const Index = () => {
 
       {/* Hero */}
       <section className="relative h-screen bg-black flex flex-col px-6 py-12 md:px-16 md:py-16 z-20 overflow-hidden">
-        {/* Interactive Paint Reveal Canvas */}
+        {/* Interactive Paint Reveal Canvas: Reveals Aman photo on cursor movement */}
         <div className="absolute inset-0 z-0">
-          <PaintReveal />
+          <PaintReveal revealImage="/aman.jpg" />
         </div>
 
         <AvailabilityBadge />
