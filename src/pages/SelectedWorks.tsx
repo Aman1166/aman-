@@ -48,6 +48,24 @@ const projects = [
     links: { live: "https://jaineventplanner.com/", code: "#" },
     image: "/projects/jain-event-planner.png",
     cta: "View Project"
+  },
+  {
+    id: "006",
+    title: "RizeWorld",
+    stack: "Digital Agency / Technology / Web Solutions",
+    description: "An IT and digital agency platform delivering modern web development, branding, and high-performance digital growth solutions.",
+    links: { live: "https://rizeworld.in/", code: "#" },
+    image: "/projects/rizeworld.png",
+    cta: "View Project"
+  },
+  {
+    id: "007",
+    title: "RizeWorld Institute",
+    stack: "EdTech / Course Portal / Skill Development",
+    description: "A professional institute website focused on digital marketing, web development and other skill-based courses.",
+    links: { live: "https://rizeworldinstitute.in/", code: "#" },
+    image: "/projects/rizeworld-institute.png",
+    cta: "View Project"
   }
 ];
 
