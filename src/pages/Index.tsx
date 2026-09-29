@@ -15,6 +15,7 @@ import Aman from "../components/Aman";
 import FAQGravity from "../components/FAQGravity";
 import VerticalAccordion from "../components/VerticalAccordion";
 import LanyardCard from "@/components/LanyardCard";
+import PaintReveal from "@/components/PaintReveal";
 
 const dummyTestimonials = [
   {
@@ -238,6 +239,11 @@ const Index = () => {
 
       {/* Hero */}
       <section className="relative h-screen bg-black flex flex-col px-6 py-12 md:px-16 md:py-16 z-20 overflow-hidden">
+        {/* Interactive Paint Reveal Canvas */}
+        <div className="absolute inset-0 z-0">
+          <PaintReveal />
+        </div>
+
         <AvailabilityBadge />
         <SocialStrip />
         <SpinningCTA />
