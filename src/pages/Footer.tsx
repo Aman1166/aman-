@@ -1,18 +1,7 @@
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import { useRef } from "react";
+import { motion, Variants } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 const Footer = () => {
-  const footerRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: footerRef,
-    offset: ["start end", "end end"],
-  });
-
-  // Dynamically scrubs opacity & scale using scroll progression instead of transition
-  const textScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const textOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -35,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={footerRef} className="relative bg-black text-white font-sans pt-12 md:pt-20 border-t border-white h-screen flex flex-col" style={{ position: 'relative' }}>
+    <footer className="relative bg-black text-white font-sans pt-12 md:pt-20 border-t border-white h-screen flex flex-col" style={{ position: 'relative' }}>
 
       {/* Top Section: Info Grid */}
       <motion.div
@@ -165,45 +154,12 @@ const Footer = () => {
         </motion.div>
       </motion.div>
 
-      {/* Bottom Section: Branding Text - NOGOOD style 3D letter flip */}
-      <motion.div
-        style={{ opacity: textOpacity, scale: textScale }}
-        className="w-full flex-1 flex flex-col justify-center items-center overflow-hidden select-none"
-      >
-        <style>{`
-          @keyframes letterFlip {
-            0%   { transform: rotateX(0deg); }
-            35%  { transform: rotateX(60deg); }
-            50%  { transform: rotateX(0deg); }
-            85%  { transform: rotateX(-60deg); }
-            100% { transform: rotateX(0deg); }
-          }
-          .aman-letter {
-            animation: letterFlip 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            transform-style: preserve-3d;
-            display: inline-block;
-            position: relative;
-          }
-        `}</style>
-        <div
-          className="w-full flex items-center justify-center max-w-[100vw] overflow-hidden py-4"
-          style={{ perspective: "1000px" }}
-        >
-          {["A", "M", "A", "N"].map((char, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-center mx-1 sm:mx-2 md:mx-4 lg:mx-6"
-            >
-              <span
-                style={{ animationDelay: `${index * 0.3}s` }}
-                className="aman-letter font-sans font-black text-[22vw] md:text-[24vw] lg:text-[26vw] leading-none tracking-tighter text-white select-none drop-shadow-[0_10px_35px_rgba(255,255,255,0.15)]"
-              >
-                {char}
-              </span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+      {/* Bottom Section: Branding Wordmark - Clean bold grotesque typography matching reference */}
+      <div className="w-full flex-1 flex items-center justify-center overflow-hidden select-none py-4 md:py-6">
+        <h2 className="font-sans font-black text-[22vw] sm:text-[23vw] md:text-[24vw] leading-none tracking-tight text-white uppercase text-center select-none pointer-events-none">
+          AMAN
+        </h2>
+      </div>
     </footer>
   );
 };
