@@ -103,6 +103,7 @@
   }
 
   html {
+    position: relative;
     /* Removed scroll-behavior: smooth — Lenis handles this now */
     margin: 0 !important;
     padding: 0 !important;
@@ -113,6 +114,7 @@
   }
 
   body {
+    position: relative;
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
     margin: 0 !important;
