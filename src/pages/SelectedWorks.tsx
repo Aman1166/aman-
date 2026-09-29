@@ -6,11 +6,11 @@ import './ScrollStack.css';
 const projects = [
   {
     id: "001",
-    title: "Jain Event Planner",
-    stack: "React / JavaScript / Tailwind CSS",
-    description: "A modern event and wedding planning website designed to showcase services and provide an engaging experience for visitors.",
-    links: { live: "https://jaineventplanner.com/", code: "#" },
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2000&auto=format&fit=crop",
+    title: "Sushanti Dhyan Yoga",
+    stack: "Wellness / Yoga & Meditation / Holistic Health",
+    description: "A peaceful wellness and meditation website dedicated to yoga practices, spiritual well-being, and guided sessions.",
+    links: { live: "https://sushantidhyanyoga.in/", code: "#" },
+    image: "/projects/sushanti-dhyan-yoga.png",
     cta: "View Project"
   },
   {
@@ -19,7 +19,7 @@ const projects = [
     stack: "E-Commerce / Luxury Jewellery / UI & UX",
     description: "A premium jewellery e-commerce website designed with a modern and elegant user experience.",
     links: { live: "https://zoniraz.com/", code: "#" },
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2000&auto=format&fit=crop",
+    image: "/projects/zoniraz-jewels.png",
     cta: "View Project"
   },
   {
@@ -28,7 +28,7 @@ const projects = [
     stack: "Responsive Web / Education / React",
     description: "A responsive school website providing information about academics, admissions, facilities, activities and school curriculum.",
     links: { live: "https://www.dwpsalwar.in/", code: "#" },
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop",
+    image: "/projects/dwps-alwar.png",
     cta: "View Project"
   },
   {
@@ -37,34 +37,16 @@ const projects = [
     stack: "Luxury Transportation / Fleet & Booking / UI",
     description: "A premier luxury limousine and chauffeur transportation service website with online fleet showcase and booking system.",
     links: { live: "https://shinelimosllc.com/", code: "#" },
-    image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=2000&auto=format&fit=crop",
+    image: "/projects/shine-limos.png",
     cta: "View Project"
   },
   {
     id: "005",
-    title: "RizeWorld",
-    stack: "Digital Agency / Technology / Web Solutions",
-    description: "An IT and digital agency platform delivering modern web development, branding, and digital growth solutions.",
-    links: { live: "https://rizeworld.in/", code: "#" },
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop",
-    cta: "View Project"
-  },
-  {
-    id: "006",
-    title: "RizeWorld Institute",
-    stack: "EdTech / Course Portal / Skill Development",
-    description: "A professional institute website focused on digital marketing, web development and other skill-based courses.",
-    links: { live: "https://rizeworldinstitute.in/", code: "#" },
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2000&auto=format&fit=crop",
-    cta: "View Project"
-  },
-  {
-    id: "007",
-    title: "Sushanti Dhyan Yoga",
-    stack: "Wellness / Yoga & Meditation / Holistic Health",
-    description: "A peaceful wellness and meditation website dedicated to yoga practices, spiritual well-being, and guided sessions.",
-    links: { live: "https://sushantidhyanyoga.in/", code: "#" },
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2000&auto=format&fit=crop",
+    title: "Jain Event Planner",
+    stack: "Event Management / Web Design / React",
+    description: "A modern event and wedding planning website designed to showcase services and provide an engaging experience for visitors.",
+    links: { live: "https://jaineventplanner.com/", code: "#" },
+    image: "/projects/jain-event-planner.png",
     cta: "View Project"
   }
 ];
